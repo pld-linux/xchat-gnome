@@ -3,15 +3,16 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.3
-Release:	0
+Version:	0.2
+Release:	0.1
 Group:		X11/Applications/Networking
 License:	GPL
 Source0:	http://navi.cx/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	c057f7fc07c039e876f68529b9994352
+# Source0-md5:	f063da0f0a536c7dac6015b9c32da5a7
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	python-devel
 Requires(post):	GConf2
 Conflicts:	xchat
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
