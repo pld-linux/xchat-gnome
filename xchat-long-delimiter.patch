@@ -1,0 +1,64 @@
+diff -ur o-xchat-2.4.0/src/fe-gtk/xtext.c xchat-2.4.0/src/fe-gtk/xtext.c
+--- o-xchat-2.4.0/src/fe-gtk/xtext.c	2004-11-12 09:35:13.377815084 -0700
++++ xchat-2.4.0/src/fe-gtk/xtext.c	2004-11-12 15:30:26.501404006 -0700
+@@ -72,9 +72,16 @@
+ #endif
+ 
+ /* is delimiter */
+-#define is_del(c) \
+-	(c == ' ' || c == '\n' || c == ')' || c == '(' || \
+-	 c == '>' || c == '<' || c == ATTR_RESET || c == ATTR_BOLD || c == 0)
++int is_del(const char *c) {
++	int ret;
++	ret = 0;
++	ret = (c[0] == ' ' || c[0] == '\n' || c[0] == ')' || c[0] == '(' || 
++	 c[0] == '>' || c[0] == '<' || c[0] == ATTR_RESET || c[0] == ATTR_BOLD || c == 0);
++	if(!ret) {
++		ret = strncmp(c, "“", 3) == 0 || strncmp(c, "”", 3) == 0;
++	}
++	return ret;
++}
+ 
+ #ifdef SCROLL_HACK
+ /* force scrolling off */
+@@ -1745,6 +1752,7 @@
+ 	int offset;
+ 	unsigned char *str;
+ 	unsigned char *word;
++	unsigned char *nstr;
+ 	int len;
+ 	int out_of_bounds = 0;
+ 
+@@ -1765,16 +1773,17 @@
+ 
+ 	str = ent->str + offset;
+ 
+-	while (!is_del (*str) && str != ent->str)
+-		str--;
+-	word = str + 1;
++	while (!is_del(str))
++		str = g_utf8_prev_char(str);
++	word = g_utf8_next_char(str);
+ 
+ 	len = 0;
+ 	str = word;
+-	while (!is_del (*str) && len != ent->str_len)
++	while (!is_del(str) && len != ent->str_len)
+ 	{
+-		str++;
+-		len++;
++		nstr = g_utf8_next_char(str);
++		len += nstr - str;
++		str = nstr;
+ 	}
+ 
+ 	if (len > 0 && word[len-1]=='.')
+@@ -3777,7 +3786,7 @@
+ 				}
+ 
+ 				/* keep a record of the last space, for wordwrapping */
+-				if (is_del (*str))
++				if (g_unichar_isspace(g_utf8_get_char(str)))
+ 				{
+ 					last_space = str;
+ 					limit_offset = 0;
