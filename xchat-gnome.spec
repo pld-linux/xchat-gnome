@@ -89,9 +89,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f xchat-gnome.lang
 %defattr(644,root,root,755)
-%doc README ChangeLog faq.html COPYING plugins/plugin20.html plugins/perl/xchat2-perldocs.html
+%doc README ChangeLog faq.html plugins/plugin20.html plugins/perl/xchat2-perldocs.html
 %attr(755,root,root) %{_bindir}/xchat
-%{_datadir}/xchat/*
+%dir %{_libdir}/xchat
+%dir %{_libdir}/xchat/plugins
+%{_datadir}/xchat
 %{_desktopdir}/xchat.desktop
 %{_desktopdir}/xchat-gnome.desktop
 %{_pixmapsdir}/xchat.png
