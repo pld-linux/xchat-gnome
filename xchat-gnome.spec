@@ -3,12 +3,12 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.2
+Version:	0.4
 Release:	0.1
 Group:		X11/Applications/Networking
 License:	GPL
-Source0:	http://navi.cx/releases/%{name}-%{version}.tar.bz2
-# Source0-md5:	f063da0f0a536c7dac6015b9c32da5a7
+Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
+# Source0-md5:	6a480e9af44fba6febb761d5a125d1cb
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
@@ -75,9 +75,9 @@ install -d $RPM_BUILD_ROOT%{_desktopdir} \
 mv -f $RPM_BUILD_ROOT%{_bindir}/xchat-gnome $RPM_BUILD_ROOT%{_bindir}/xchat
 mv -f $RPM_BUILD_ROOT%{_libdir}/perl.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 mv -f $RPM_BUILD_ROOT%{_libdir}/python.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
+mv -f $RPM_BUILD_ROOT%{_libdir}/notification.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
+mv -f $RPM_BUILD_ROOT%{_libdir}/urlscraper.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
-mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gconf/schemas/apps_xchat.schemas.in.in \
-	$RPM_BUILD_ROOT%{_sysconfdir}/gconf/schemas/apps_xchat.schemas
 
 %find_lang xchat-gnome
 
@@ -89,16 +89,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f xchat-gnome.lang
 %defattr(644,root,root,755)
-%doc README ChangeLog faq.html plugins/plugin20.html plugins/perl/xchat2-perldocs.html
+%doc README ChangeLog faq.html plugins/plugin20.html
 %attr(755,root,root) %{_bindir}/xchat
 %dir %{_libdir}/xchat
 %dir %{_libdir}/xchat/plugins
+%attr(755,root,root) %{_libdir}/xchat/plugins/urlscraper.so
+%attr(755,root,root) %{_libdir}/xchat/plugins/notification.so
 %{_datadir}/xchat
 %{_desktopdir}/xchat.desktop
 %{_desktopdir}/xchat-gnome.desktop
 %{_pixmapsdir}/xchat.png
 %{_pixmapsdir}/xchat-gnome.png
 %{_sysconfdir}/gconf/schemas/apps_xchat.schemas
+%{_sysconfdir}/gconf/schemas/urlscraper.schemas
 
 %files perl
 %defattr(644,root,root,755)
