@@ -11,6 +11,7 @@ Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	6a480e9af44fba6febb761d5a125d1cb
 Patch0:	xchat-long-delimiter.patch
 Patch1:	xchat-domains.patch
+Patch2:	%{name}-ex-crash.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
@@ -60,11 +61,13 @@ Wtyczka dodaj±ca do XChata mo¿liwo¶æ uruchamiania skryptów w Pythonie.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %configure \
 	--disable-dependency-tracking \
 	--enable-gnomefe \
+	--enable-ipv6 \
 	--disable-tcl
 %{__make}
 
