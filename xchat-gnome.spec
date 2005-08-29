@@ -3,15 +3,13 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.4
+Version:	0.5
 Release:	0.1
 Group:		X11/Applications/Networking
 License:	GPL
 Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	6a480e9af44fba6febb761d5a125d1cb
+# Source0-md5:	5b2a8a3abae883f68695d9bcf65a568b
 Patch0:	xchat-long-delimiter.patch
-Patch1:	xchat-domains.patch
-Patch2:	%{name}-ex-crash.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
@@ -60,8 +58,6 @@ Wtyczka dodaj±ca do XChata mo¿liwo¶æ uruchamiania skryptów w Pythonie.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 %configure \
@@ -78,8 +74,6 @@ install -d $RPM_BUILD_ROOT%{_desktopdir} \
 	$RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 
 %makeinstall
-
-mv -f $RPM_BUILD_ROOT%{_bindir}/xchat-gnome $RPM_BUILD_ROOT%{_bindir}/xchat
 mv -f $RPM_BUILD_ROOT%{_libdir}/perl.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 mv -f $RPM_BUILD_ROOT%{_libdir}/python.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 mv -f $RPM_BUILD_ROOT%{_libdir}/notification.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
@@ -97,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f xchat-gnome.lang
 %defattr(644,root,root,755)
 %doc README ChangeLog faq.html plugins/plugin20.html
+%attr(755,root,root) %{_bindir}/xchat-gnome
 %attr(755,root,root) %{_bindir}/xchat
 %dir %{_libdir}/xchat
 %dir %{_libdir}/xchat/plugins
@@ -107,8 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/xchat-gnome.desktop
 %{_pixmapsdir}/xchat.png
 %{_pixmapsdir}/xchat-gnome.png
-%{_sysconfdir}/gconf/schemas/apps_xchat.schemas
-%{_sysconfdir}/gconf/schemas/urlscraper.schemas
+%{_sysconfdir}/gconf/schemas/*.schemas
 
 %files perl
 %defattr(644,root,root,755)
