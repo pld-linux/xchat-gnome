@@ -3,12 +3,12 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.5
+Version:	0.6
 Release:	0.1
 Group:		X11/Applications/Networking
 License:	GPL
 Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	5b2a8a3abae883f68695d9bcf65a568b
+# Source0-md5:	ef76823773da1e216c580cc0e289d2b4
 Patch0:	xchat-long-delimiter.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
@@ -74,6 +74,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir} \
 	$RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 
 %makeinstall
+mv -f $RPM_BUILD_ROOT%{_libdir}/dbus.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 mv -f $RPM_BUILD_ROOT%{_libdir}/perl.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 mv -f $RPM_BUILD_ROOT%{_libdir}/python.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 mv -f $RPM_BUILD_ROOT%{_libdir}/notification.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
@@ -92,11 +93,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README ChangeLog faq.html plugins/plugin20.html
 %attr(755,root,root) %{_bindir}/xchat-gnome
+%attr(755,root,root) %{_bindir}/xchat-remote
 %attr(755,root,root) %{_bindir}/xchat
 %dir %{_libdir}/xchat
 %dir %{_libdir}/xchat/plugins
-%attr(755,root,root) %{_libdir}/xchat/plugins/urlscraper.so
+%attr(755,root,root) %{_libdir}/xchat/plugins/dbus.so
 %attr(755,root,root) %{_libdir}/xchat/plugins/notification.so
+%attr(755,root,root) %{_libdir}/xchat/plugins/urlscraper.so
 %{_datadir}/xchat
 %{_desktopdir}/xchat.desktop
 %{_desktopdir}/xchat-gnome.desktop
