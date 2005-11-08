@@ -1,11 +1,10 @@
---- xchat-2.4.5/src/common/url.c~	2005-09-11 09:46:48.038559736 +0200
-+++ xchat-2.4.5/src/common/url.c	2005-09-11 09:50:10.169831112 +0200
-@@ -240,6 +240,8 @@
- 			return WORD_HOST;
- 		if (CMPL (pre, '.','c','o','m'))
- 			return WORD_HOST;
-+		if (CMPL (pre, '.','b','i','z'))
-+			return WORD_HOST;
- 		if (CMPL (pre, '.','e','d','u'))
- 			return WORD_HOST;
- 
+--- xchat-2.6.0/src/common/url.c~	2005-11-07 14:34:00.810809152 +0100
++++ xchat-2.6.0/src/common/url.c	2005-11-07 14:35:17.607134336 +0100
+@@ -150,6 +150,7 @@
+ 		{ D(".html") },
+ 		{ D(".info") },
+ 		{ D(".name") },
++		{ D(".biz") },
+ 	};
+ #undef D
+ 	const char *at, *dot;
