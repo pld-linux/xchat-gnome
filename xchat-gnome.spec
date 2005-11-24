@@ -3,12 +3,12 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.6
+Version:	0.7
 Release:	0.1
 Group:		X11/Applications/Networking
 License:	GPL
 Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ef76823773da1e216c580cc0e289d2b4
+# Source0-md5:	a5f0940ee6389d58222a04facca0aa0d
 Patch0:	xchat-long-delimiter.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
@@ -81,7 +81,7 @@ mv -f $RPM_BUILD_ROOT%{_libdir}/notification.so $RPM_BUILD_ROOT%{_libdir}/xchat/
 mv -f $RPM_BUILD_ROOT%{_libdir}/urlscraper.so $RPM_BUILD_ROOT%{_libdir}/xchat/plugins
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
-%find_lang xchat-gnome
+%find_lang xchat-gnome --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -106,6 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/xchat.png
 %{_pixmapsdir}/xchat-gnome.png
 %{_sysconfdir}/gconf/schemas/*.schemas
+%{_omf_dest_dir}/%{name}/xchat-gnome-C.omf
+
 
 %files perl
 %defattr(644,root,root,755)
