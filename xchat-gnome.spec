@@ -13,6 +13,7 @@ Patch0:	xchat-long-delimiter.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	libsexy-devel
 BuildRequires:	python-devel
 Requires(post):	GConf2
 Conflicts:	xchat
