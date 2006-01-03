@@ -14,6 +14,7 @@ Patch1:	%{name}-gtk-2.8.9.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	enchant-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libsexy-devel
 BuildRequires:	python-devel
