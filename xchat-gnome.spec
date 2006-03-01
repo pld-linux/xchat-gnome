@@ -3,14 +3,13 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.8
+Version:	0.10
 Release:	1
 Group:		X11/Applications/Networking
 License:	GPL
 Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	048f0bb530bc2afce43aff6eb9538554
+# Source0-md5:	1ff2b7adfc71592951ee843599a8c8f7
 Patch0:	%{name}-long-delimiter.patch
-Patch1:	%{name}-gtk-2.8.9.patch
 URL:		http://xchat.org/
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
@@ -62,7 +61,6 @@ Wtyczka dodaj±ca do XChata mo¿liwo¶æ uruchamiania skryptów w Pythonie.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %configure \
@@ -102,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/netmonitor.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/notification.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/notifyosd.so
+%attr(755,root,root) %{_libdir}/xchat-gnome/plugins/soundnotification.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/urlscraper.so
 %{_datadir}/xchat-gnome
 %{_desktopdir}/xchat-gnome.desktop
