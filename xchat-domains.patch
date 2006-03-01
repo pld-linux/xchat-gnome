@@ -1,10 +1,31 @@
---- xchat-2.6.0/src/common/url.c~	2005-11-07 14:34:00.810809152 +0100
-+++ xchat-2.6.0/src/common/url.c	2005-11-07 14:35:17.607134336 +0100
-@@ -150,6 +150,7 @@
- 		{ D(".html") },
- 		{ D(".info") },
- 		{ D(".name") },
-+		{ D(".biz") },
- 	};
- #undef D
- 	const char *at, *dot;
+diff -ur o-xchat-2.4.0/src/common/text.c xchat-2.4.0/src/common/text.c
+--- o-xchat-2.4.0/src/common/text.c	2004-08-11 05:00:42.000000000 -0600
++++ xchat-2.4.0/src/common/text.c	2004-11-12 16:04:19.470096463 -0700
+@@ -178,9 +178,27 @@
+ 	if (!strncasecmp (word + len - 4, ".com", 4))
+ 		return WORD_HOST;
+ 
++	if (!strncasecmp (word + len - 4, ".biz", 4))
++		return WORD_HOST;
++
++	if (!strncasecmp (word + len - 5, ".name", 5))
++		return WORD_HOST;
++
++	if (!strncasecmp (word + len - 5, ".info", 5))
++		return WORD_HOST;
++
+ 	if (!strncasecmp (word + len - 4, ".edu", 4))
+ 		return WORD_HOST;
+ 
++	if (!strncasecmp (word + len - 3, ".us", 3))
++		return WORD_HOST;
++
++	if (!strncasecmp (word + len - 3, ".uk", 3))
++		return WORD_HOST;
++
++	if (!strncasecmp (word + len - 3, ".jp", 3))
++		return WORD_HOST;
++
+ 	if (len > 5)
+ 	{
+ 		if (word[len - 3] == '.' &&
