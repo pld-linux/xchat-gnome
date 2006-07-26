@@ -5,19 +5,19 @@ Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
 Version:	0.10
 Release:	1
-Group:		X11/Applications/Networking
 License:	GPL
-Source0:	http://flapjack.navi.cx/releases/%{name}/%{name}-%{version}.tar.bz2
+Group:		X11/Applications/Networking
+Source0:	http://flapjack.navi.cx/releases/xchat-gnome/%{name}-%{version}.tar.bz2
 # Source0-md5:	1ff2b7adfc71592951ee843599a8c8f7
-Patch0:	%{name}-long-delimiter.patch
+Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat.org/
+BuildRequires:	enchant-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
-BuildRequires:	enchant-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libsexy-devel
-BuildRequires:	python-devel
 BuildRequires:	perl-devel
+BuildRequires:	python-devel
 Requires(post):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -78,8 +78,8 @@ install -d $RPM_BUILD_ROOT%{_desktopdir} \
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm $RPM_BUILD_ROOT/%{_libdir}/xchat-gnome/plugins/*.a
-rm $RPM_BUILD_ROOT/%{_libdir}/xchat-gnome/plugins/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.a
+rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.la
 
 %find_lang xchat-gnome --with-gnome
 
