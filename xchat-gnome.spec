@@ -3,12 +3,12 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.10
+Version:	0.13
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://flapjack.navi.cx/releases/xchat-gnome/%{name}-%{version}.tar.bz2
-# Source0-md5:	1ff2b7adfc71592951ee843599a8c8f7
+# Source0-md5:	5614773724afa0c2e617615722e10091
 Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat.org/
 BuildRequires:	enchant-devel
@@ -95,6 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/xchat-gnome
 %attr(755,root,root) %{_bindir}/xchat-gnome-remote
 %dir %{_libdir}/xchat-gnome
+%dir %{_libdir}/xchat-gnome/plugins
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/autoaway.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/dbus.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/netmonitor.so
@@ -102,9 +103,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/notifyosd.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/soundnotification.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/urlscraper.so
+%dir %{_datadir}/omf/xchat-gnome
+%{_iconsdir}/hicolor/48x48/apps/xchat-gnome.png
 %{_datadir}/xchat-gnome
 %{_desktopdir}/xchat-gnome.desktop
-%{_pixmapsdir}/xchat-gnome.png
+#%{_pixmapsdir}/xchat-gnome.png
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_omf_dest_dir}/%{name}/xchat-gnome-C.omf
 
