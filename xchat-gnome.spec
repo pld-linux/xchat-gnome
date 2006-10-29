@@ -3,12 +3,12 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.13
+Version:	0.14
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://flapjack.navi.cx/releases/xchat-gnome/%{name}-%{version}.tar.bz2
-# Source0-md5:	5614773724afa0c2e617615722e10091
+# Source0-md5:	8686d5328541404415df486fa115eb6d
 Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat.org/
 BuildRequires:	enchant-devel
@@ -18,7 +18,9 @@ BuildRequires:	libnotify-devel
 BuildRequires:	libsexy-devel
 BuildRequires:	perl-devel
 BuildRequires:	python-devel
+BuildRequires:	scrollkeeper >= 0.3.11
 Requires(post):	GConf2
+Requires(post,postun):	scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -88,16 +90,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install
+%scrollkeeper_update_post
+
+%postun
+%scrollkeeper_update_postun
 
 %files -f xchat-gnome.lang
 %defattr(644,root,root,755)
 %doc README ChangeLog
 %attr(755,root,root) %{_bindir}/xchat-gnome
-%attr(755,root,root) %{_bindir}/xchat-gnome-remote
 %dir %{_libdir}/xchat-gnome
 %dir %{_libdir}/xchat-gnome/plugins
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/autoaway.so
-%attr(755,root,root) %{_libdir}/xchat-gnome/plugins/dbus.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/netmonitor.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/notification.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/notifyosd.so
@@ -110,7 +114,8 @@ rm -rf $RPM_BUILD_ROOT
 #%{_pixmapsdir}/xchat-gnome.png
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_omf_dest_dir}/%{name}/xchat-gnome-C.omf
-
+%{_datadir}/dbus-1/services/org.gnome.Xchat.service
+%{_mandir}/man1/xchat-gnome.1*
 
 %files perl
 %defattr(644,root,root,755)
