@@ -3,12 +3,12 @@ Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr):	Client IRC (chat) avec interface graphique
 Summary(pl):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.14
+Version:	0.15
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://flapjack.navi.cx/releases/xchat-gnome/%{name}-%{version}.tar.bz2
-# Source0-md5:	8686d5328541404415df486fa115eb6d
+# Source0-md5:	a0f1f011e594d85a5a5781cfc5f52221
 Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat.org/
 BuildRequires:	enchant-devel
@@ -108,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/soundnotification.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/urlscraper.so
 %dir %{_datadir}/omf/xchat-gnome
-%{_iconsdir}/hicolor/48x48/apps/xchat-gnome.png
+%{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/xchat-gnome
 %{_desktopdir}/xchat-gnome.desktop
 #%{_pixmapsdir}/xchat-gnome.png
