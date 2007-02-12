@@ -1,7 +1,7 @@
 Summary:	Graphical IRC (chat) client
-Summary(de):	IRC-Client (Chat) mit grafischer Oberfläche
-Summary(fr):	Client IRC (chat) avec interface graphique
-Summary(pl):	Graficzny klient IRC (chat)
+Summary(de.UTF-8):   IRC-Client (Chat) mit grafischer OberflÃ¤che
+Summary(fr.UTF-8):   Client IRC (chat) avec interface graphique
+Summary(pl.UTF-8):   Graficzny klient IRC (chat)
 Name:		xchat-gnome
 Version:	0.16
 Release:	1
@@ -31,15 +31,15 @@ A GUI IRC client with DCC file transfers, C plugin interface, Perl and
 Python scripting capability, mIRC color, shaded transparency, tabbed
 channels and more.
 
-%description -l pl
-Klient IRC z graficznym interfejsem u¿ytkownika, z przesy³aniem plików
-DCC, interfejsem do wtyczek w C, mo¿liwo¶ci± uruchamiania skryptów w
-Perlu i Pythonie, obs³ug± kolorów mIRC-a, cieniowan±
-przezroczysto¶ci±, zak³adkami z kana³ami itd.
+%description -l pl.UTF-8
+Klient IRC z graficznym interfejsem uÅ¼ytkownika, z przesyÅ‚aniem plikÃ³w
+DCC, interfejsem do wtyczek w C, moÅ¼liwoÅ›ciÄ… uruchamiania skryptÃ³w w
+Perlu i Pythonie, obsÅ‚ugÄ… kolorÃ³w mIRC-a, cieniowanÄ…
+przezroczystoÅ›ciÄ…, zakÅ‚adkami z kanaÅ‚ami itd.
 
 %package perl
 Summary:	XChat Perl plugin
-Summary(pl):	Wtyczka Perla do XChata
+Summary(pl.UTF-8):   Wtyczka Perla do XChata
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	perl
@@ -47,12 +47,12 @@ Requires:	perl
 %description perl
 Provides Perl scripting capability to XChat.
 
-%description perl -l pl
-Wtyczka dodaj±ca do XChata mo¿liwo¶æ uruchamiania skryptów w Perlu.
+%description perl -l pl.UTF-8
+Wtyczka dodajÄ…ca do XChata moÅ¼liwoÅ›Ä‡ uruchamiania skryptÃ³w w Perlu.
 
 %package python
 Summary:	XChat Python plugin
-Summary(pl):	Wtyczka Pythona do XChata
+Summary(pl.UTF-8):   Wtyczka Pythona do XChata
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	python >= 2.2.0
@@ -60,8 +60,8 @@ Requires:	python >= 2.2.0
 %description python
 Provides Python scripting capability to XChat.
 
-%description python -l pl
-Wtyczka dodaj±ca do XChata mo¿liwo¶æ uruchamiania skryptów w Pythonie.
+%description python -l pl.UTF-8
+Wtyczka dodajÄ…ca do XChata moÅ¼liwoÅ›Ä‡ uruchamiania skryptÃ³w w Pythonie.
 
 %prep
 %setup -q
