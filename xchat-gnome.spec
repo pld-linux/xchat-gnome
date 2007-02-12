@@ -1,7 +1,7 @@
 Summary:	Graphical IRC (chat) client
-Summary(de.UTF-8):   IRC-Client (Chat) mit grafischer Oberfläche
-Summary(fr.UTF-8):   Client IRC (chat) avec interface graphique
-Summary(pl.UTF-8):   Graficzny klient IRC (chat)
+Summary(de.UTF-8):	IRC-Client (Chat) mit grafischer Oberfläche
+Summary(fr.UTF-8):	Client IRC (chat) avec interface graphique
+Summary(pl.UTF-8):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
 Version:	0.16
 Release:	1
@@ -39,7 +39,7 @@ przezroczystością, zakładkami z kanałami itd.
 
 %package perl
 Summary:	XChat Perl plugin
-Summary(pl.UTF-8):   Wtyczka Perla do XChata
+Summary(pl.UTF-8):	Wtyczka Perla do XChata
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	perl
@@ -52,7 +52,7 @@ Wtyczka dodająca do XChata możliwość uruchamiania skryptów w Perlu.
 
 %package python
 Summary:	XChat Python plugin
-Summary(pl.UTF-8):   Wtyczka Pythona do XChata
+Summary(pl.UTF-8):	Wtyczka Pythona do XChata
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	python >= 2.2.0
