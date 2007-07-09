@@ -3,12 +3,12 @@ Summary(de.UTF-8):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr.UTF-8):	Client IRC (chat) avec interface graphique
 Summary(pl.UTF-8):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.17
+Version:	0.18
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://flapjack.navi.cx/releases/xchat-gnome/%{name}-%{version}.tar.bz2
-# Source0-md5:	bcb8e97a63c0fda6fcba0f88309ea645
+# Source0-md5:	4976cd34a0e9115c800b5d317e121182
 Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat-gnome.navi.cx/
 BuildRequires:	autoconf
