@@ -15,10 +15,20 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	enchant-devel
 BuildRequires:	gettext-devel
+BuildRequires:	GConf2-devel
 BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	gnome-common
+BuildRequires:	gnome-doc-tools
+BuildRequires:	gnome-doc-utils
 BuildRequires:	libnotify-devel
 BuildRequires:	libsexy-devel >= 0.1.11
+BuildRequires:	libglade2-devel
+BuildRequires:	gnome-vfs2-devel
+BuildRequires:	libgnome-devel
+BuildRequires:	libgnomeui-devel
+BuildRequires:	libtool
 BuildRequires:	perl-devel
+BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	scrollkeeper >= 0.3.11
 Requires(post):	GConf2
