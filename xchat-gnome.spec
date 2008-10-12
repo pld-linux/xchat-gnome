@@ -3,36 +3,40 @@ Summary(de.UTF-8):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr.UTF-8):	Client IRC (chat) avec interface graphique
 Summary(pl.UTF-8):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.18
+Version:	0.24.0
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://flapjack.navi.cx/releases/xchat-gnome/%{name}-%{version}.tar.bz2
-# Source0-md5:	4976cd34a0e9115c800b5d317e121182
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/xchat-gnome/0.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	925010f01f593e6ff7027f2ba523c607
 Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat-gnome.navi.cx/
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	enchant-devel
+BuildRequires:	GConf2-devel >= 2.24.0
+BuildRequires:	autoconf >= 2.60
+BuildRequires:	automake >= 1:1.9
+BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-devel
-BuildRequires:	GConf2-devel
-BuildRequires:	gtk+2-devel >= 2.0.0
-BuildRequires:	gnome-common
-BuildRequires:	gnome-doc-tools
-BuildRequires:	gnome-doc-utils
-BuildRequires:	libnotify-devel
+BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	gnome-common >= 2.24.0
+BuildRequires:	gnome-doc-utils >= 0.14.0
+BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	intltool >= 0.40.0
+BuildRequires:	libcanberra-gtk-devel >= 0.3
+BuildRequires:	libglade2-devel >= 1:2.6.2
+BuildRequires:	libgnomeui-devel >= 2.24.0
+BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libsexy-devel >= 0.1.11
-BuildRequires:	libglade2-devel
-BuildRequires:	gnome-vfs2-devel
-BuildRequires:	libgnome-devel
-BuildRequires:	libgnomeui-devel
 BuildRequires:	libtool
+BuildRequires:	openssl-devel
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel
-BuildRequires:	scrollkeeper >= 0.3.11
-Requires(post):	GConf2
+BuildRequires:	rpmbuild(find_lang) >= 1.23
+BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	scrollkeeper
+Requires(post,postun):	gtk+2
 Requires(post,postun):	scrollkeeper
+Requires(post,preun):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,41 +81,48 @@ Wtyczka dodająca do XChata możliwość uruchamiania skryptów w Pythonie.
 %patch0 -p1
 
 %build
+%{__libtoolize}
+%{__intltoolize}
 %{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-dependency-tracking \
-	--enable-gnomefe \
-	--enable-ipv6 \
 	--disable-tcl
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_desktopdir} \
-	$RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.a
-rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.la
+rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.{a,la}
 
-%find_lang xchat-gnome --with-gnome
+%find_lang %{name} --with-gnome --with-omf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%gconf_schema_install
+%gconf_schema_install apps_xchat.schemas
+%gconf_schema_install notification.schemas
+%gconf_schema_install url_handler.schemas
+%gconf_schema_install urlscraper.schemas
 %scrollkeeper_update_post
+%update_icon_cache hicolor
+
+%preun
+%gconf_schema_uninstall apps_xchat.schemas
+%gconf_schema_uninstall notification.schemas
+%gconf_schema_uninstall url_handler.schemas
+%gconf_schema_uninstall urlscraper.schemas
 
 %postun
 %scrollkeeper_update_postun
+%update_icon_cache hicolor
 
-%files -f xchat-gnome.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README ChangeLog
 %attr(755,root,root) %{_bindir}/xchat-gnome
@@ -123,13 +134,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/notifyosd.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/soundnotification.so
 %attr(755,root,root) %{_libdir}/xchat-gnome/plugins/urlscraper.so
-%dir %{_datadir}/omf/xchat-gnome
 %{_iconsdir}/hicolor/*/apps/*
 %{_datadir}/xchat-gnome
 %{_desktopdir}/xchat-gnome.desktop
-#%{_pixmapsdir}/xchat-gnome.png
-%{_sysconfdir}/gconf/schemas/*.schemas
-%{_omf_dest_dir}/%{name}/xchat-gnome-C.omf
+%{_sysconfdir}/gconf/schemas/apps_xchat.schemas
+%{_sysconfdir}/gconf/schemas/notification.schemas
+%{_sysconfdir}/gconf/schemas/url_handler.schemas
+%{_sysconfdir}/gconf/schemas/urlscraper.schemas
 %{_datadir}/dbus-1/services/org.gnome.Xchat.service
 %{_mandir}/man1/xchat-gnome.1*
 
