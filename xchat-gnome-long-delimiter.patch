@@ -1,8 +1,8 @@
-diff -ur xchat-gnome-0.14-o/src/fe-gnome/xtext.c xchat-gnome-0.14/src/fe-gnome/xtext.c
---- xchat-gnome-0.14-o/src/fe-gnome/xtext.c	2006-10-15 17:19:09.000000000 -0600
-+++ xchat-gnome-0.14/src/fe-gnome/xtext.c	2006-10-28 21:55:54.000000000 -0600
-@@ -64,9 +64,16 @@
- #include "xg-marshal.h"
+diff -urN xchat-gnome-0.24.0/src/fe-gnome/xtext.c xchat-gnome-0.24.0.new/src/fe-gnome/xtext.c
+--- xchat-gnome-0.24.0/src/fe-gnome/xtext.c	2008-09-07 16:18:10.000000000 +0200
++++ xchat-gnome-0.24.0.new/src/fe-gnome/xtext.c	2008-10-12 00:28:44.000000000 +0200
+@@ -77,9 +77,16 @@
+ #endif
  
  /* is delimiter */
 -#define is_del(c) \
@@ -19,9 +19,9 @@ diff -ur xchat-gnome-0.14-o/src/fe-gnome/xtext.c xchat-gnome-0.14/src/fe-gnome/x
 +	return ret;
 +}
  
+ #ifdef SCROLL_HACK
  /* force scrolling off */
- #define dontscroll(buf) (buf)->last_pixel_pos = 0x7fffffff
-@@ -1576,6 +1583,7 @@
+@@ -1813,6 +1820,7 @@
  	int offset;
  	unsigned char *str;
  	unsigned char *word;
@@ -29,39 +29,36 @@ diff -ur xchat-gnome-0.14-o/src/fe-gnome/xtext.c xchat-gnome-0.14/src/fe-gnome/x
  	int len;
  	int out_of_bounds = 0;
  
-@@ -1586,16 +1594,16 @@
+@@ -1833,16 +1841,16 @@
  
  	str = ent->str + offset;
  
--	while (!is_del (*str) && str != ent->str) {
+-	while (!is_del (*str) && str != ent->str)
 -		str--;
--	}
 -	word = str + 1;
-+ 	while (!is_del(str))
-+ 		str = g_utf8_prev_char(str);
-+ 	word = g_utf8_next_char(str);
++	while (!is_del(str))
++		str = g_utf8_prev_char(str);
++	word = g_utf8_next_char(str);
  
  	len = 0;
  	str = word;
--	while (!is_del (*str) && len != ent->str_len) {
+-	while (!is_del (*str) && len != ent->str_len)
+-	{
 -		str++;
 -		len++;
-+ 	while (!is_del(str) && len != ent->str_len) {
-+ 		nstr = g_utf8_next_char(str);
-+ 		len += nstr - str;
-+ 		str = nstr;
++	while (!is_del(str) && len != ent->str_len) {
++		nstr = g_utf8_next_char(str);
++		len += nstr - str;
++		str = nstr;
  	}
  
- 	if (len > 0 && word[len-1]=='.') {
-@@ -3452,7 +3460,7 @@
+ 	if (len > 0 && word[len-1]=='.')
+@@ -3882,7 +3890,7 @@
  				}
  
  				/* keep a record of the last space, for wordwrapping */
--				if (is_del (*str)) {
-+ 				if (g_unichar_isspace(g_utf8_get_char(str))) {
+-				if (is_del (*str))
++				if (g_unichar_isspace(g_utf8_get_char(str)))
+ 				{
  					last_space = str;
  					limit_offset = 0;
- 				}
-Only in xchat-gnome-0.14/src/fe-gnome: xtext.c~
-Only in xchat-gnome-0.14/src/fe-gnome: xtext.c.orig
-Only in xchat-gnome-0.14/src/fe-gnome: xtext.c.rej
