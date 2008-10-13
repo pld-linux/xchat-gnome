@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
 Version:	0.24.0
 Release:	1
-License:	GPL
+License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/xchat-gnome/0.24/%{name}-%{version}.tar.bz2
 # Source0-md5:	925010f01f593e6ff7027f2ba523c607
@@ -30,7 +30,7 @@ BuildRequires:	libtool
 BuildRequires:	openssl-devel
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel
+BuildRequires:	python-devel >= 2.2.0
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
@@ -55,7 +55,7 @@ Summary:	XChat Perl plugin
 Summary(pl.UTF-8):	Wtyczka Perla do XChata
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	perl
+Requires:	perl-base
 
 %description perl
 Provides Perl scripting capability to XChat.
@@ -88,6 +88,7 @@ Wtyczka dodająca do XChata możliwość uruchamiania skryptów w Pythonie.
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-static \
 	--disable-tcl
 %{__make}
 
@@ -97,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.{a,la}
+rm $RPM_BUILD_ROOT%{_libdir}/xchat-gnome/plugins/*.la
 
 %find_lang %{name} --with-gnome --with-omf
 
