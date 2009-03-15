@@ -3,12 +3,12 @@ Summary(de.UTF-8):	IRC-Client (Chat) mit grafischer Oberfläche
 Summary(fr.UTF-8):	Client IRC (chat) avec interface graphique
 Summary(pl.UTF-8):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
-Version:	0.24.3.1
+Version:	0.26.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/xchat-gnome/0.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	1405351c615c93a9fed0535eac6105b4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/xchat-gnome/0.26/%{name}-%{version}.tar.bz2
+# Source0-md5:	ef230db0d104faa8dc7e5060c51f7261
 Patch0:		%{name}-long-delimiter.patch
 URL:		http://xchat-gnome.navi.cx/
 BuildRequires:	GConf2-devel >= 2.24.0
