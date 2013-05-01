@@ -1,0 +1,19 @@
+--- xchat-gnome-0.26.1.orig/src/common/dbus/Makefile.am
++++ xchat-gnome-0.26.1/src/common/dbus/Makefile.am
+@@ -48,11 +48,11 @@ schema_DATA = $(schema_in_files:.schemas
+ 
+ install-data-local: $(schema_DATA)
+ if GCONF_SCHEMAS_INSTALL
+-        if test -z "$(DESTDIR)" ; then \
+-	        for p in $^ ; do \
+-	        GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p >&1 > /dev/null; \
+-	        done \
+-        fi
++	if test -z "$(DESTDIR)" ; then \
++		for p in $^ ; do \
++		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $$p >&1 > /dev/null; \
++		done \
++	fi
+ endif
+ 
+ EXTRA_DIST =				\

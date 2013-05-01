@@ -1,0 +1,11 @@
+--- xchat-gnome-0.26.1/plugins/notify-osd/notify-osd.c~	2008-09-07 15:18:27.000000000 +0200
++++ xchat-gnome-0.26.1/plugins/notify-osd/notify-osd.c	2013-04-14 14:36:40.000000000 +0200
+@@ -67,7 +67,7 @@
+ 	gchar *escaped;
+ 
+ 	escaped = g_markup_escape_text (message, strlen(message));
+-	notify = notify_notification_new (summary, escaped, NULL, NULL);
++	notify = notify_notification_new (summary, escaped, NULL);
+ 	notify_notification_set_urgency (notify, NOTIFY_URGENCY_NORMAL);
+ 	notify_notification_set_icon_from_pixbuf (notify, notify_icon);
+ 	if (!notify_notification_show (notify, &error)) {
