@@ -8,7 +8,7 @@ diff -urN xchat-gnome-0.24.0/src/fe-gnome/xtext.c xchat-gnome-0.24.0.new/src/fe-
 -#define is_del(c) \
 -	(c == ' ' || c == '\n' || c == ')' || c == '(' || \
 -	 c == '>' || c == '<' || c == ATTR_RESET || c == ATTR_BOLD || c == 0)
-+int is_del(const char *c) {
++static int is_del(const char *c) {
 +	int ret;
 +	ret = 0;
 +	ret = (c[0] == ' ' || c[0] == '\n' || c[0] == ')' || c[0] == '(' || 
