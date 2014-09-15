@@ -1,0 +1,11 @@
+--- xchat-gnome-0.26.1/configure.ac~	2009-04-12 15:49:32.000000000 +0200
++++ xchat-gnome-0.26.1/configure.ac	2014-09-15 22:56:20.000621295 +0200
+@@ -173,7 +173,7 @@
+ 
+ if test "x$have_perl" != "xno"; then
+ 	AC_MSG_CHECKING(for Perl header files)
+-	PERL_HEADER_TEST=`PT=perltest.c ; echo "#include <EXTERN.h>" > $PT;  echo "#include <perl.h>" >> $PT;  echo "#include <XSUB.h>" >> $PT ;  echo "int main() { return 0; }" >> $PT ; $CC -Wall $PT -o $PT.out $($PERL -MExtUtils::Embed -e ccopts) 1>/dev/null 2>&1; echo $?; rm -f $PT $PT.out 1>/dev/null 2>&1`
++	PERL_HEADER_TEST=`PT=perltest.c ; echo "#include <EXTERN.h>" > $PT;  echo "#include <perl.h>" >> $PT;  echo "#include <XSUB.h>" >> $PT ;  echo "int main() { return 0; }" >> $PT ; $CC -c -Wall $PT -o $PT.out $($PERL -MExtUtils::Embed -e ccopts) 1>/dev/null 2>&1; echo $?; rm -f $PT $PT.out 1>/dev/null 2>&1`
+ 
+ 	if test "x$PERL_HEADER_TEST" = "x0" ; then
+ 		PERL_CFLAGS=`$PERL -MExtUtils::Embed -e ccopts`

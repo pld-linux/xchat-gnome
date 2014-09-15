@@ -12,6 +12,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/xchat-gnome/0.26/%{name}-%{versi
 Patch0:		%{name}-long-delimiter.patch
 Patch1:		%{name}-notify.patch
 Patch2:		%{name}-makefile.patch
+Patch3:		perl-detect.patch
 URL:		http://xchat-gnome.navi.cx/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.60
@@ -83,6 +84,7 @@ Wtyczka dodająca do XChata możliwość uruchamiania skryptów w Pythonie.
 %patch0 -p1
 %patch1	-p1
 %patch2	-p1
+%patch3	-p1
 
 %build
 %{__libtoolize}
