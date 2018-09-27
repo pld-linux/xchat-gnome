@@ -1,0 +1,68 @@
+--- xchat-gnome-0.26.1/src/common/server.c.orig	2018-09-27 15:56:46.608064545 +0200
++++ xchat-gnome-0.26.1/src/common/server.c	2018-09-27 16:07:09.710698536 +0200
+@@ -598,9 +598,9 @@
+ 	char buf[512];
+ 
+ 
+-	X509_NAME_oneline (X509_get_subject_name (ctx->current_cert), subject,
++	X509_NAME_oneline (X509_get_subject_name (X509_STORE_CTX_get_current_cert(ctx)), subject,
+ 							 sizeof (subject));
+-	X509_NAME_oneline (X509_get_issuer_name (ctx->current_cert), issuer,
++	X509_NAME_oneline (X509_get_issuer_name (X509_STORE_CTX_get_current_cert(ctx)), issuer,
+ 							 sizeof (issuer));
+ 
+ 	snprintf (buf, sizeof (buf), "* Subject: %s", subject);
+@@ -751,7 +751,7 @@
+ 		return (0);					  /* remove it (0) */
+ 	} else
+ 	{
+-		if (serv->ssl->session && serv->ssl->session->time + SSLTMOUT < time (NULL))
++		if (SSL_get_session(serv->ssl) && SSL_SESSION_get_time( SSL_get_session(serv->ssl) ) + SSLTMOUT < time (NULL))
+ 		{
+ 			snprintf (buf, sizeof (buf), "SSL handshake timed out");
+ 			EMIT_SIGNAL (XP_TE_CONNFAIL, serv->server_session, buf, NULL,
+--- xchat-gnome-0.26.1/src/common/ssl.c.orig	2018-09-27 16:08:42.338868615 +0200
++++ xchat-gnome-0.26.1/src/common/ssl.c	2018-09-27 16:23:10.787612779 +0200
+@@ -70,7 +70,7 @@
+ 
+ 	SSLeay_add_ssl_algorithms ();
+ 	SSL_load_error_strings ();
+-	ctx = SSL_CTX_new (server ? SSLv3_server_method() : SSLv3_client_method ());
++	ctx = SSL_CTX_new (server ? TLS_server_method() : TLS_client_method ());
+ 
+ 	SSL_CTX_set_session_cache_mode (ctx, SSL_SESS_CACHE_BOTH);
+ 	SSL_CTX_set_timeout (ctx, 300);
+@@ -136,6 +136,8 @@
+ _SSL_get_cert_info (struct cert_info *cert_info, SSL * ssl)
+ {
+ 	X509 *peer_cert;
++	X509_PUBKEY *key;
++	X509_ALGOR *algor = NULL;
+ 	EVP_PKEY *peer_pkey;
+ 	/* EVP_PKEY *ca_pkey; */
+ 	/* EVP_PKEY *tmp_pkey; */
+@@ -155,8 +157,13 @@
+ 	broke_oneline (cert_info->subject, cert_info->subject_word);
+ 	broke_oneline (cert_info->issuer, cert_info->issuer_word);
+ 
+-	alg = OBJ_obj2nid (peer_cert->cert_info->key->algor->algorithm);
+-	sign_alg = OBJ_obj2nid (peer_cert->sig_alg->algorithm);
++	key = X509_get_X509_PUBKEY(peer_cert);
++	if (!X509_PUBKEY_get0_param(NULL, NULL, 0, &algor, key)) {
++		return 1;
++	}
++	alg = OBJ_obj2nid (algor->algorithm);
++		
++	sign_alg = X509_get_signature_nid(peer_cert);
+ 	ASN1_TIME_snprintf (notBefore, sizeof (notBefore),
+ 							  X509_get_notBefore (peer_cert));
+ 	ASN1_TIME_snprintf (notAfter, sizeof (notAfter),
+@@ -281,7 +288,7 @@
+ 		__SSL_critical_error ("SSL_new");
+ 
+ 	SSL_set_fd (ssl, sd);
+-	if (ctx->method == SSLv3_client_method())
++	if (SSL_CTX_get_ssl_method (ctx) == TLS_client_method())
+ 		SSL_set_connect_state (ssl);
+ 	else
+ 	        SSL_set_accept_state(ssl);

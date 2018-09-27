@@ -4,7 +4,7 @@ Summary(fr.UTF-8):	Client IRC (chat) avec interface graphique
 Summary(pl.UTF-8):	Graficzny klient IRC (chat)
 Name:		xchat-gnome
 Version:	0.26.1
-Release:	12
+Release:	13
 License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/xchat-gnome/0.26/%{name}-%{version}.tar.bz2
@@ -13,6 +13,7 @@ Patch0:		%{name}-long-delimiter.patch
 Patch1:		%{name}-notify.patch
 Patch2:		%{name}-makefile.patch
 Patch3:		perl-detect.patch
+Patch4:		%{name}-openssl-1.1.patch
 URL:		http://xchat-gnome.navi.cx/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.60
@@ -85,6 +86,7 @@ Wtyczka dodająca do XChata możliwość uruchamiania skryptów w Pythonie.
 %patch1	-p1
 %patch2	-p1
 %patch3	-p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
