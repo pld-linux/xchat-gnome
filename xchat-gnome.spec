@@ -96,6 +96,7 @@ Wtyczka dodająca do XChata możliwość uruchamiania skryptów w Pythonie.
 %{__autoheader}
 %{__automake}
 %configure \
+	CFLAGS="%{rpmcflags} -fcommon" \
 	--enable-compile-warnings=minimum \
 	--disable-static \
 	--disable-tcl
